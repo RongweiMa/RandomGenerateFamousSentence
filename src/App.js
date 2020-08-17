@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import Quotes from './Database';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+const App = () => {
+    const [quote, setQuote] = useState(Quotes[0].quote)
+    const [author, setAuthor] = useState(Quotes[0].author)
+
+    const handleClick = () => {
+        console.log('Button Click')
+        const rand = Math.floor(Math.random() * Quotes.length)
+        console.log('Random Number is', rand)
+        setQuote(Quotes[rand].quote)
+        setAuthor(Quotes[rand].author)
+    }
+
+    // console.log(Quotes[0].quote)
+    return ( 
+        <div className="container">
+        <div className="wrappers w3-animate-top">
+          <p className="quote">{quote}</p>
+          {author ? <p className="author">- {author}</p> : <p className="author">- Unknown</p>}
+        </div>
+        <button className="button-main" onClick={handleClick}>Generate Quote</button>
     </div>
-  );
+    )
 }
 
 export default App;
